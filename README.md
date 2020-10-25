@@ -1,1 +1,6 @@
-# stack-overflow-chatbot
+The aim is to create a conversational chatbot based on popular Q&A website called ‘Stack Overflow’, deploy it on Telegram messenger and host it on AWS for serving results to the incoming traffic queries. The scripting and business logic is carried in Python. Token and API generation will be done on the Telegram Messenger and the files will be integrated into AWS for 24x7 access.
+1.	The first step is to distinguish programming-related queries from dialogues. To do this, we perform binary classification on TF-IDF representation of texts. The output labels will be either ‘dialogues’ for general questions or ‘Stack Overflow’ for programming questions. We’ll concatenate both into one sample and train the intent recogniser using Logistic Regression model. Finally, we’ll dump the classifier to use it in the running bot using Pickle. 
+2.	Next, we select and train ‘OnevsRest’ classifier for programming queries. It will predict exactly one programming language and dump the classifier to be used in the running bot.
+3.	To find a relevant answer to a question, we’ll use pre-trained word embeddings model StarSpace developed by Facebook), to precompute representations for all possible answers and calculate approximate data structures:
+-	tag_post_ids: to show title and link to thread
+-	tag_vectors: embeddings for each answer are saved
